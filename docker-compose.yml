@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  # MySQL
+  mysql56:
+    container_name: mysql56ujis
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sandbox
+      #      MYSQL_USER: sandbox_user
+      #      MYSQL_PASSWORD: passpass
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./db/data:/var/lib/mysql"
+      - "./db/charset.cnf:/etc/mysql/conf.d/charset.cnf"
+      - "./db/sql:/docker-entrypoint-initdb.d"
